@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>Create User</h1>
+    <h1>
+      Register Account</h1>
     <form v-on:submit.prevent = "createUser">
-      <div>name: <input type="text" v-model="user.name"></div>
-      <div>lastname: <input type="text" v-model="user.lastname"></div>
-      <div>email: <input type="text" v-model="user.email"></div>
-      <div>password: <input type="password" v-model="user.password"></div>
-      <div><button type="submit">create user</button></div>
+      <div>Firstname: <input type="text" v-model="user.name"></div>
+      <div>Lastname: <input type="text" v-model="user.lastname"></div>
+      <div>Email: <input type="text" v-model="user.email"></div>
+      <div>Password: <input type="password" v-model="user.password"></div>
+      <div><button type="submit">Register</button></div>
     </form>
   </div>
 </template>

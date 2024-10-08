@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div class="user-card">
     <h1>Show User</h1>
-    <p>ID: {{ user.id }} </p>
-    <p>Name: {{ user.id }} </p>
-    <p>Lastname: {{ user.lastname }} </p>
-    <p>Email: {{ user.email }}</p>
-    <p>Password: {{ user.password }}</p>
-    <p>Status: {{ user.status }}</p>
-    <p>Type: {{ user.type }}</p>
-    <p>Created At: {{ user.createdAt }}</p>
+    <div class="user-details">
+      <p><strong>ID:</strong> {{ user.id }} </p>
+      <p><strong>Name:</strong> {{ user.name }} </p>
+      <p><strong>Lastname:</strong> {{ user.lastname }} </p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Password:</strong> {{ user.password }}</p>
+      <p><strong>Status:</strong> {{ user.status }}</p>
+      <p><strong>Created At:</strong> {{ user.createdAt }}</p>
+    </div>
   </div>
 </template>
 

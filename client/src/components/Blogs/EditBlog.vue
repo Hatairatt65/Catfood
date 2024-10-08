@@ -1,20 +1,26 @@
 <template>
     <div>
-        <h1>Edit Blog</h1>
-        <form v-on:submit.prevent = "editBlog">
-            <p>title: <input type="text" v-model="blog.title"></p>
-            <p><strong>content:</strong></p>
-            <vue-ckeditor 
-                v-model.lazy="blog.content" 
-                :config="config" 
-                @blur="onBlur($event)" 
-                @focus="onFocus($event)"
-            />
-            <p>category: <input type="text" v-model="blog.category"></p>
-            <p>status: <input type="text" v-model="blog.status"></p>
+        <h1>Edit Catfood</h1>
+        <form v-on:submit.prevent="editBlog">
+            <p>ชื่ออาหารแมว: <input type="text" v-model="blog.catfoodname"></p>
+            <p>ยี่ห้อ :<input type="text" v-model="blog.brand" /></p>
+            <p>เหมาะสำหรับอายุ: <input type="text" v-model="blog.age"></p>
             <p>
-            <button type="submit">update blog</button>
-            <button v-on:click="navigateTo('/blogs')">กลับ</button>
+                ประเภทของอาหาร :
+                <label>
+                    <input type="radio" v-model="blog.type" value="อาหารเปียก" />
+                    อาหารเปียก
+                </label>
+                <label>
+                    <input type="radio" v-model="blog.type" value="อาหารเม็ด" />
+                    อาหารเม็ด
+                </label>
+            </p>
+            <p>ราคา:<input type="text" v-model="blog.price" min="0" style="width: 70px;" /> บาท</p>
+            <p>สต๊อก:<input type="number" v-model="blog.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน</p>
+            <p>
+                <button type="submit">อัปเดตข้อมูล</button>
+                <button v-on:click="navigateTo('/blogs')">กลับ</button>
             </p>
         </form>
     </div>
@@ -25,15 +31,15 @@ import VueCkeditor from "vue-ckeditor2"
 
 export default {
     components: { VueCkeditor },
-    data () {
+    data() {
         return {
             blog: {
-                title: '',
-                thumbnail: 'null',
-                pictures: 'null',
-                content: '',
-                category: '',
-                status: ''
+                catfoodname: '',
+                brand: 'null',
+                age: 'null',
+                type: '',
+                price: '',
+                Stock: '',
             },
             config: {
                 toolbar: [
@@ -44,7 +50,7 @@ export default {
         }
     },
     methods: {
-        async editBlog () {
+        async editBlog() {
             try {
                 await BlogsService.put(this.blog)
                 this.$router.push({
@@ -56,13 +62,13 @@ export default {
         }
 
     },
-    async created () {
+    async created() {
         try {
             let blogId = this.$route.params.blogId
             this.blog = (await BlogsService.show(blogId)).data
-            
+
         } catch (error) {
-            console.log (error)
+            console.log(error)
         }
     },
 
@@ -70,5 +76,4 @@ export default {
 
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

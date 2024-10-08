@@ -1,72 +1,105 @@
 <template>
   <div>
-    <h1>Create Blog</h1>
+    <h1>Add Catfood</h1>
     <form v-on:submit.prevent="createBlog">
       <p>
-        title:
-        <input type="text" v-model="blog.title" />
+        ชื่ออาหารแมว :
+        <input type="text" v-model="blog.catfoodname" />
       </p>
       <p>
-        <strong>content:</strong>
-      </p>
-      <vue-ckeditor
-        v-model.lazy="blog.content"
-        :config="config"
-        @blur="onBlur($event)"
-        @focus="onFocus($event)"
-      />
-      <p>
-        category:
-        <input type="text" v-model="blog.category" />
+        ยี่ห้อ :
+        <input type="text" v-model="blog.brand" />
       </p>
       <p>
-        status:
-        <input type="text" v-model="blog.status" />
+        เหมาะสำหรับอายุ :
+        <input type="text" v-model="blog.age" />
       </p>
       <p>
-        <button type="submit">create blog</button>
+        ประเภทของอาหาร :
+        <label>
+          <input type="radio" v-model="blog.type" value="อาหารเปียก" />
+          อาหารเปียก
+        </label>
+        <label>
+          <input type="radio" v-model="blog.type" value="อาหารเม็ด" />
+          อาหารเม็ด
+        </label>
+      </p>
+      <p>
+        ราคา:
+        <input type="text" v-model="blog.price" min="0" style="width: 70px;" /> บาท
+      </p>
+      <p> สต๊อก:
+        <input type="number" v-model="blog.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน
+      </p>
+      <p>
+        Upload photo:
+        <input type="file" @change="filesChange($event.target.files)" accept="image/*" />
+        <ul class="pictures">
+          <li v-if="pictures.length > 0" :key="pictures[0].id">
+            <br />
+            <img :src="pictures[0].url" alt="picture image" style="width: 200px;" />
+          </li>
+        </ul>
+      </p>
+      <p></p>
+      <p>
+        <button type="submit">Add Catfood</button>
       </p>
     </form>
   </div>
 </template>
+
 <script>
 import BlogsService from "@/services/BlogsService";
-import VueCkeditor from "vue-ckeditor2";
+import UploadService from "@/services/UploadService"; // เพิ่มการนำเข้า UploadService
 
 export default {
-  components: { VueCkeditor },
   data() {
     return {
       blog: {
-        title: "",
-        thumbnail: "null",
-        pictures: "null",
-        content: "",
-        category: "",
-        status: "saved",
+        catfoodname: "",
+        brand: "",
+        age: "",
+        type: "",
+        price: "",
+        Stock: "",
+        picture: "",
+        BASE_URL: "http://localhost:8081/assets/uploads/",
       },
-      config: {
-        toolbar: [
-          ["Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript"],
-        ],
-        height: 300,
-      },
+      pictures: [], // เปลี่ยนให้สามารถเก็บภาพได้เพียง 1 ภาพ
     };
   },
   methods: {
     async createBlog() {
+      if (this.pictures.length === 0) {
+        alert("Please upload a picture.");
+        return;
+      }
+
+      // อัปเดตชื่อไฟล์ภาพใน blog ก่อนส่งไปยังเซิร์ฟเวอร์
+      this.blog.picture = this.pictures[0].name; // ใช้เฉพาะภาพแรก
+
       try {
         await BlogsService.post(this.blog);
-        this.$router.push({
-          name: "blogs",
-        });
+        this.$router.push({ name: "blogs" });
       } catch (err) {
         console.log(err);
       }
     },
+    async filesChange(fileList) {
+      const formData = new FormData();
+      this.pictures = []; // ล้าง pictures ก่อนหน้านี้
+      const file = fileList[0]; // รับเพียงไฟล์แรก
+      if (file) {
+        formData.append("images", file);
+        const url = URL.createObjectURL(file); // สร้าง URL สำหรับแสดงภาพ
+        this.pictures.push({ id: 1, name: file.name, url }); // เก็บ URL ด้วย
+      }
+
+      // อัปโหลดไฟล์ภาพไปยังเซิร์ฟเวอร์
+      await UploadService.upload(formData);
+    },
   },
 };
 </script>
-<style scoped>
-
-</style>
