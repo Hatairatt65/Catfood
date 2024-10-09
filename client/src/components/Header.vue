@@ -5,7 +5,7 @@
         <img src="@/assets/logo.png" alt="Logo" />
       </div>
       <ul class="nav">
-        <li><router-link :to="{ name: 'blogs' }">Catfood</router-link></li>
+        <li><router-link :to="{ name: 'catfoods' }">Catfood</router-link></li>
         <li><router-link :to="{ name: 'users' }">Profile</router-link></li>
         <li><router-link :to="{ name: 'login' }">Login</router-link></li>
       </ul>

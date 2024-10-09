@@ -1,45 +1,43 @@
 <template>
   <div class="catfood-form-container">
     <h1>Add Catfood</h1>
-    <form v-on:submit.prevent="createBlog" class="catfood-form">
+    <form v-on:submit.prevent="createCatfood" class="catfood-form">
       <div class="form-group">
-        <label>ชื่ออาหารแมว:</label>
-        <input type="text" v-model="blog.catfoodname" />
+        <label>ชื่ออาหารแมว :</label>
+        <input type="text" v-model="catfood.catfoodname" />
       </div>
       <div class="form-group">
-        <label>ยี่ห้อ:</label>
-        <input type="text" v-model="blog.brand" />
+        <label>ยี่ห้อ :</label>
+        <input type="text" v-model="catfood.brand" />
       </div>
       <div class="form-group">
-        <label>เหมาะสำหรับอายุ:</label>
-        <input type="text" v-model="blog.age" />
+        <label>เหมาะสำหรับอายุ :</label>
+        <input type="text" v-model="catfood.age" />
       </div>
       <div class="form-group">
-        <label>ประเภทของอาหาร:</label>
+        <label>ประเภทของอาหาร :</label>
         <label>
-          <input type="radio" v-model="blog.type" value="อาหารเปียก" />
+          <input type="radio" v-model="catfood.type" value="อาหารเปียก" />
           อาหารเปียก
         </label>
         <label>
-          <input type="radio" v-model="blog.type" value="อาหารเม็ด" />
+          <input type="radio" v-model="catfood.type" value="อาหารเม็ด" />
           อาหารเม็ด
         </label>
       </div>
       <div class="form-group">
-        <label>ราคา:</label>
-        <input type="text" v-model="blog.price" min="0" style="width: 70px;" /> บาท
+        <label>ราคา : <input type="text" v-model="catfood.price" min="0" style="width: 70px;" /> บาท</label>
       </div>
       <div class="form-group">
-        <label>สต๊อก:</label>
-        <input type="number" v-model="blog.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน
+        <label>สต๊อก : <input type="number" v-model="catfood.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน</label>
       </div>
       <div class="form-group">
-        <label>Upload photo:</label>
+        <label>Upload photo : </label>
         <input type="file" @change="filesChange($event.target.files)" accept="image/*" />
         <ul class="pictures">
           <li v-if="pictures.length > 0" :key="pictures[0].id">
             <br />
-            <img :src="pictures[0].url" alt="picture image" style="width: 200px;" />
+            <img :src="pictures[0].url" alt="picture image" class="uploaded-image" />
           </li>
         </ul>
       </div>
@@ -55,9 +53,9 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #e3d6f8 0%, #b4ddfa 100%);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
@@ -71,6 +69,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 13px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease; /* Transition for inputs */
 }
 
 .form-group {
@@ -85,14 +84,30 @@ label {
   color: #555;
 }
 
-input[type="text"], input[type="number"], input[type="file"] {
-  padding: 8px;
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 14px;
   width: 100%;
   box-sizing: border-box;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; /* Transition for inputs */
 }
+
+input[type="text"]:hover,
+input[type="number"]:hover {
+  transform: translateY(-3px); /* Raise input on hover */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #37a8d4;
+  box-shadow: 0 0 5px rgba(27, 98, 126, 0.5);
+  transform: translateY(0); /* Reset the transform on focus */
+}
+
 
 input[type="radio"] {
   margin-right: 5px;
@@ -106,29 +121,34 @@ input[type="radio"] {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .submit-button:hover {
   background-color: #e95be2;
+  transform: scale(1.05);
 }
 
 .pictures img {
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  max-width: 150px; /* เปลี่ยนขนาดความกว้างที่ต้องการ */
+  height: auto; /* รักษาสัดส่วนของภาพ */
 }
+
+
 </style>
 
 
 <script>
-import BlogsService from "@/services/BlogsService";
+import CatfoodsService from "@/services/CatfoodsService";
 import UploadService from "@/services/UploadService"; // เพิ่มการนำเข้า UploadService
 
 export default {
   data() {
     return {
-      blog: {
+      catfood: {
         catfoodname: "",
         brand: "",
         age: "",
@@ -142,18 +162,18 @@ export default {
     };
   },
   methods: {
-    async createBlog() {
+    async createCatfood() {
       if (this.pictures.length === 0) {
         alert("Please upload a picture.");
         return;
       }
 
-      // อัปเดตชื่อไฟล์ภาพใน blog ก่อนส่งไปยังเซิร์ฟเวอร์
-      this.blog.picture = this.pictures[0].name; // ใช้เฉพาะภาพแรก
+      // อัปเดตชื่อไฟล์ภาพใน catfood ก่อนส่งไปยังเซิร์ฟเวอร์
+      this.catfood.picture = this.pictures[0].name; // ใช้เฉพาะภาพแรก
 
       try {
-        await BlogsService.post(this.blog);
-        this.$router.push({ name: "blogs" });
+        await CatfoodsService.post(this.catfood);
+        this.$router.push({ name: "catfoods" });
       } catch (err) {
         console.log(err);
       }

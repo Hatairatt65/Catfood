@@ -9,10 +9,10 @@ import Login from '@/components/Login'
 
 import CommentIndex from '@/components/Comments/index' 
 
-import BlogIndex from '@/components/Blogs/index'
-import BlogCreate from '@/components/Blogs/CreateBlog'
-import BlogShow from '@/components/Blogs/ShowBlog'
-import BlogEdit from '@/components/Blogs/EditBlog'
+import CatfoodIndex from '@/components/Catfoods/index'
+import CatfoodCreate from '@/components/Catfoods/CreateCatfood'
+import CatfoodShow from '@/components/Catfoods/ShowCatfood'
+import CatfoodEdit from '@/components/Catfoods/EditCatfood'
 
 Vue.use(Router)
 
@@ -45,24 +45,24 @@ export default new Router({
       component: Login
     },
     {
-      path: '/blogs',
-      name: 'blogs',
-      component: BlogIndex
+      path: '/catfoods',
+      name: 'catfoods',
+      component: CatfoodIndex
     },
     {
-      path: '/blog/create',
-      name: 'blog-create',
-      component: BlogCreate
+      path: '/catfood/create',
+      name: 'catfood-create',
+      component: CatfoodCreate
     },
     {
-      path: '/blog/edit/:blogId',
-      name: 'blog-edit',
-      component: BlogEdit
+      path: '/catfood/edit/:catfoodId',
+      name: 'catfood-edit',
+      component: CatfoodEdit
     },
     {
-      path: '/blog/:blogId',
-      name: 'blog',
-      component: BlogShow
+      path: '/catfood/:catfoodId',
+      name: 'catfood',
+      component: CatfoodShow
     },
     {
       path: '/comments',

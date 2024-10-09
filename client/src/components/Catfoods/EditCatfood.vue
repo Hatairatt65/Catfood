@@ -1,63 +1,52 @@
 <template>
     <div class="edit-catfood-container">
         <h1 class="title">Edit Catfood</h1>
-        <form v-on:submit.prevent="editBlog" class="catfood-form">
-            <div v-if="blog.picture" class="image-preview">
-                <img :src="BASE_URL + blog.picture" alt="Catfood Image" class="catfood-image" />
+        <form v-on:submit.prevent="editCatfood" class="catfood-form">
+            <div v-if="catfood.picture" class="image-preview">
+                <img :src="BASE_URL + catfood.picture" alt="Catfood Image" class="catfood-image" />
             </div>
             <div class="form-group">
                 <label for="catfoodname">ชื่ออาหารแมว:</label>
-                <input type="text" id="catfoodname" v-model="blog.catfoodname" class="form-input" />
+                <input type="text" id="catfoodname" v-model="catfood.catfoodname" class="form-input" />
             </div>
             <div class="form-group">
                 <label for="brand">ยี่ห้อ:</label>
-                <input type="text" id="brand" v-model="blog.brand" class="form-input" />
+                <input type="text" id="brand" v-model="catfood.brand" class="form-input" />
             </div>
             <div class="form-group">
                 <label for="age">เหมาะสำหรับอายุ:</label>
-                <input type="text" id="age" v-model="blog.age" class="form-input" />
+                <input type="text" id="age" v-model="catfood.age" class="form-input" />
             </div>
             <div class="form-group">
                 <label>ประเภทของอาหาร:</label>
                 <label>
-                    <input type="radio" v-model="blog.type" value="อาหารเปียก" />
+                    <input type="radio" v-model="catfood.type" value="อาหารเปียก" />
                     อาหารเปียก
                 </label>
                 <label>
-                    <input type="radio" v-model="blog.type" value="อาหารเม็ด" />
+                    <input type="radio" v-model="catfood.type" value="อาหารเม็ด" />
                     อาหารเม็ด
                 </label>
             </div>
             <div class="form-group">
                 <label for="price">ราคา:</label>
-                <input type="number" id="price" v-model="blog.price" min="0" class="form-input small-input" /> บาท
+                <input type="number" id="price" v-model="catfood.price" min="0" class="form-input small-input" /> บาท
             </div>
             <div class="form-group">
                 <label for="stock">สต๊อก:</label>
-                <input type="number" id="stock" v-model="blog.Stock" step="0.01" min="0" class="form-input small-input" /> จำนวน
+                <input type="number" id="stock" v-model="catfood.Stock" step="0.01" min="0" class="form-input small-input" /> จำนวน
             </div>
             <div class="form-buttons">
                 <button type="submit" class="submit-button">Update</button>
-                <button type="button" @click="navigateTo('/blogs')" class="back-button">back</button>
+                <button type="button" @click="navigateTo('/catfoods')" class="back-button">back</button>
             </div>
         </form>
     </div>
 </template>
 <style scoped>
 .edit-catfood-container {
-    max-width: 600px;
+    max-width: 400px;
     margin: 0 auto;
-    padding: 30px; /* Increased padding for the container */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition for smooth effect */
-}
-
-.edit-catfood-container:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-    transform: translateY(-5px); /* Raise container on hover */
 }
 
 .title {
@@ -79,14 +68,14 @@
     padding: 10px; /* Inner padding of the input */
     margin: 5px 0; /* Margin to create space around input */
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition for inputs */
+    transition: box-shadow 0.25s ease, transform 0.25s ease; /* Transition for inputs */
 }
 
 .form-input:hover {
     box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2); /* Darker shadow on input hover */
-    transform: translateY(-2px); /* Raise input on hover */
+    transform: translateY(-3px); /* Raise input on hover */
 }
 
 .small-input {
@@ -102,7 +91,7 @@
     width: 300px;
     height: auto;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 20px;
 }
 
 .form-buttons {
@@ -143,12 +132,12 @@
 
 
 <script>
-import BlogsService from '@/services/BlogsService'
+import CatfoodsService from '@/services/CatfoodsService'
 
 export default {
     data() {
         return {
-            blog: {
+            catfood: {
                 catfoodname: '',
                 brand: 'null',
                 age: 'null',
@@ -161,11 +150,11 @@ export default {
         }
     },
     methods: {
-    async editBlog() {
+    async editCatfood() {
         try {
-            await BlogsService.put(this.blog);
+            await CatfoodsService.put(this.catfood);
             this.$router.push({
-                name: 'blogs'
+                name: 'catfoods'
             });
         } catch (err) {
             console.log(err);
@@ -177,8 +166,8 @@ export default {
 },
     async created() {
         try {
-            let blogId = this.$route.params.blogId
-            this.blog = (await BlogsService.show(blogId)).data
+            let catfoodId = this.$route.params.catfoodId
+            this.catfood = (await CatfoodsService.show(catfoodId)).data
         } catch (error) {
             console.log(error)
         }

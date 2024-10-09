@@ -6,7 +6,7 @@
     </div>
     <hr />
     <div v-if="users.length" class="user-list">
-      <div><b>จำนวนผู้ใช้งาน:</b> {{ users.length }}</div><br>
+      <div class="user-count"><b>จำนวนผู้ใช้งาน:</b> {{ users.length }}</div><br>
       <div v-for="user in users" v-bind:key="user.id" class="user-card">
         <div class="user-details">
           <div class="user-detail"><b>id:</b> <span>{{ user.id }}</span></div>
@@ -35,17 +35,18 @@
   margin: 40px auto;
   padding: 30px;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* กราเดียนต์สีเดียวกับ header */
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* เงาแบบเด่นชัด */
-  color: white; /* สีข้อความ */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
 .title {
   text-align: center;
   font-size: 2.5em;
   margin-bottom: 20px;
-  letter-spacing: 1.5px; /* ช่องว่างระหว่างตัวอักษร */
+  letter-spacing: 1.5px;
+  color: #fff;
 }
 
 .create-user {
@@ -60,12 +61,12 @@
 .logout-button {
   padding: 12px 25px;
   border: none;
-  border-radius: 30px; /* มุมมนมากขึ้น */
+  border-radius: 30px;
   color: white;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.3s;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* เงา */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .create-button {
@@ -94,8 +95,8 @@
 .edit-button:hover,
 .delete-button:hover,
 .logout-button:hover {
-  transform: translateY(-3px); /* ยกปุ่มขึ้น */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงา */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .create-button:hover {
@@ -122,24 +123,30 @@
   margin-top: 20px;
 }
 
+.user-count {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
 .user-card {
   padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* เงาการ์ด */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .user-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อโฮเวอร์ */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .user-details {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* เพิ่มระยะห่างระหว่างข้อมูล */
+  gap: 15px;
   color: #333;
 }
 
@@ -160,6 +167,7 @@
   color: #333;
 }
 </style>
+
 
 <script>
 import UsersService from "@/services/UsersService";

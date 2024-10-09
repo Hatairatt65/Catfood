@@ -2,20 +2,20 @@
     <div class="catfood-detail-container">
         <h1>Show Catfood</h1>
         <div class="catfood-detail">
-            <img :src="BASE_URL + blog.picture" alt="Catfood Image" v-if="blog.picture" class="catfood-image" />
+            <img :src="BASE_URL + catfood.picture" alt="Catfood Image" v-if="catfood.picture" class="catfood-image" />
             <div class="catfood-info">
-                <p><strong>ID:</strong> {{ blog.id }}</p>
-                <p><strong>ชื่ออาหารแมว:</strong> {{ blog.catfoodname }}</p>
-                <p><strong>ยี่ห้อ:</strong> {{ blog.brand }}</p>
-                <p><strong>เหมาะสำหรับอายุ:</strong> {{ blog.age }}</p>
-                <p><strong>ประเภทของอาหาร:</strong> {{ blog.type }}</p>
-                <p><strong>ราคา:</strong> {{ blog.price }} บาท</p>
-                <p><strong>คงเหลือ:</strong> {{ blog.Stock }} จำนวน</p>
+                <p><strong>ID:</strong> {{ catfood.id }}</p>
+                <p><strong>ชื่ออาหารแมว:</strong> {{ catfood.catfoodname }}</p>
+                <p><strong>ยี่ห้อ:</strong> {{ catfood.brand }}</p>
+                <p><strong>เหมาะสำหรับอายุ:</strong> {{ catfood.age }}</p>
+                <p><strong>ประเภทของอาหาร:</strong> {{ catfood.type }}</p>
+                <p><strong>ราคา:</strong> {{ catfood.price }} บาท</p>
+                <p><strong>คงเหลือ:</strong> {{ catfood.Stock }} จำนวน</p>
             </div>
         </div>
         <div class="action-buttons">
-            <button @click="navigateTo('/blog/edit/' + blog.id)" class="action-btn edit-btn">Edit Catfood</button>
-            <button @click="navigateTo('/blogs')" class="action-btn back-btn">back</button>
+            <button @click="navigateTo('/catfood/edit/' + catfood.id)" class="action-btn edit-btn">Edit Catfood</button>
+            <button @click="navigateTo('/catfoods')" class="action-btn back-btn">back</button>
         </div>
     </div>
 </template>
@@ -26,14 +26,12 @@
     margin: 20px auto;
     padding: 20px;
     background-color: #ffffff; /* Changed to white for a cleaner look */
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition effect */
 }
 
 .catfood-detail-container:hover {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
-    transform: translateY(-5px); /* Slightly raise the container on hover */
 }
 
 h1 {
@@ -106,20 +104,20 @@ strong {
 
 
 <script>
-import BlogsService from '@/services/BlogsService';
+import CatfoodsService from '@/services/CatfoodsService';
 export default {
     data () {
         return {
-            blog: null,
+            catfood: null,
             BASE_URL: 'http://localhost:8081/assets/uploads/', // Correct base URL
         };
     },
     async created () {
         try {
-            let blogId = this.$route.params.blogId;
-            this.blog = (await BlogsService.show(blogId)).data;
+            let catfoodId = this.$route.params.catfoodId;
+            this.catfood = (await CatfoodsService.show(catfoodId)).data;
         } catch (error) {
-            console.error('Error fetching blog data:', error); // More informative error logging
+            console.error('Error fetching catfood data:', error); // More informative error logging
         }
     },
     methods: {
