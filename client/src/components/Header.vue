@@ -1,50 +1,72 @@
 <template>
   <div>
     <div class="nv-navbar">
+      <div class="logo">
+        <img src="@/assets/logo.png" alt="Logo" />
+      </div>
       <ul class="nav">
         <li><router-link :to="{ name: 'blogs' }">Catfood</router-link></li>
-        <li><router-link :to="{ name: 'users' }">Users</router-link></li>
-        <!-- <li><router-link :to="{ name: 'comments' }">Comments</router-link></li> -->
+        <li><router-link :to="{ name: 'users' }">Profile</router-link></li>
         <li><router-link :to="{ name: 'login' }">Login</router-link></li>
       </ul>
     </div>
   </div>
 </template>
-<script>
-export default {};
-</script>
+
 <style scoped>
 .nv-navbar {
-  background-color: palegoldenrod;
-  width: 100%;
-  height: 20px;
-  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* สีพื้นหลังที่เป็นกราเดียนต์ */
+  padding: 20px 40px; /* ระยะห่าง */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* เงาที่เด่นชัด */
+  border-radius: 20px; /* มุมมนมากขึ้น */
+  transition: background 0.3s; /* เอฟเฟกต์การเปลี่ยนพื้นหลัง */
 }
-.nv-navbar .nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  float: left;
+
+.logo img {
+  height: 60px; /* ขนาดโลโก้ */
+  transition: transform 0.3s; /* เอฟเฟกต์การขยายเมื่อเลื่อนเมาส์ */
 }
-.nv-navbar .nav li {
-  float: left;
+
+.logo img:hover {
+  transform: scale(1.1) rotate(5deg); /* ขยายและหมุนโลโก้ */
 }
-.nv-navbar .nav li a {
-  padding: 10px;
-  text-decoration: none;
-  color: gray;
-  font-weight: bold;
+
+.nav {
+  list-style-type: none; /* ลบจุด */
+  display: flex;
+  gap: 30px; /* ระยะห่างระหว่างลิงก์ */
 }
-.nv-navbar .nav li a:hover {
-  padding: 10px;
-  text-decoration: none;
-  color: darkslategrey;
+
+.nav li {
+  position: relative; /* สำหรับการใช้เอฟเฟกต์ */
 }
-.nv-navbar .nav li a.router-link-active {
-  background-color: gold;
-  color: darkslategrey;
+
+.nav li a {
+  text-decoration: none; /* ลบขีดเส้นใต้ */
+  color: #333; /* สีข้อความ */
+  font-size: 18px; /* ขนาดตัวอักษร */
+  padding: 10px 20px; /* ระยะห่างภายใน */
+  border-radius: 20px; /* มุมมน */
+  transition: color 0.3s, transform 0.3s, background-color 0.3s, box-shadow 0.3s; /* เอฟเฟกต์ในการเปลี่ยนสีและพื้นหลัง */
 }
-.clearfix {
-  clear: left;
+
+.nav li a:hover {
+  color: #fff; /* สีข้อความเมื่อเลื่อนเมาส์ */
+  background-color: #ff6f61; /* สีพื้นหลังเมื่อเลื่อนเมาส์ */
+  transform: translateY(-5px) scale(1.1); /* ขยับขึ้นและขยายขนาดเมื่อเลื่อนเมาส์ */
+  box-shadow: 0 4px 20px rgba(255, 111, 97, 0.6); /* เงาที่เด่นชัดเมื่อเลื่อนเมาส์ */
+}
+
+.nav li a:active {
+  transform: scale(0.95); /* หดขนาดเมื่อกด */
+}
+
+.nav li a.active {
+  color: #fff; /* สีข้อความของลิงก์ที่ถูกเลือก */
+  background-color: #ff6f61; /* พื้นหลังของลิงก์ที่ถูกเลือก */
+  border-radius: 10px; /* มุมมน */
 }
 </style>
