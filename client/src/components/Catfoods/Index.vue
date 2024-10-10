@@ -35,7 +35,7 @@
         <p><strong>เหมาะสำหรับอายุ:</strong> {{ catfood.age }}</p>
         <p><strong>ประเภทของอาหาร:</strong> {{ catfood.type }}</p>
         <p><strong>ราคา:</strong> {{ catfood.price }}.00 บาท</p>
-        <p><strong>คงเหลือ:</strong> {{ catfood.Stock }} จำนวน</p>
+        <p><strong>สต๊อกสินค้า:</strong> {{ catfood.Stock }} จำนวน</p>
         <div class="catfood-actions">
           <button @click="navigateTo('/catfood/' + catfood.id)" class="view-btn">View</button>
           <button @click="navigateTo('/catfood/edit/' + catfood.id)" class="edit-btn">Edit</button>

@@ -116,7 +116,7 @@ export default {
     async createUser(){
       try{
         await UsersService.post(this.user);
-        this.$router.push('/users');
+        this.$router.push('/login');
       }catch(err){
         console.log(err);
       }

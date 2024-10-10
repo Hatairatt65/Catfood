@@ -39,7 +39,7 @@
                 <input type="number" id="price" v-model="catfood.price" min="0" class="form-input small-input" /> บาท
             </div>
             <div class="form-group">
-                <label for="stock">สต๊อก:</label>
+                <label for="stock">สต๊อกสินค้า:</label>
                 <input type="number" id="stock" v-model="catfood.Stock" step="0.01" min="0" class="form-input small-input" /> จำนวน
             </div>
             <div class="form-buttons">

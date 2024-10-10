@@ -35,7 +35,7 @@
         <label>ราคา : <input type="text" v-model="catfood.price" min="0" style="width: 70px;" /> บาท</label>
       </div>
       <div class="form-group">
-        <label>สต๊อก : <input type="number" v-model="catfood.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน</label>
+        <label>สต๊อกสินค้า : <input type="number" v-model="catfood.Stock" step="0.01" min="0" style="width: 70px;" /> จำนวน</label>
       </div>
       <div class="form-group">
         <label>Upload photo : </label>

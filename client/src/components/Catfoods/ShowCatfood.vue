@@ -10,7 +10,7 @@
                 <p><strong>เหมาะสำหรับอายุ:</strong> {{ catfood.age }}</p>
                 <p><strong>ประเภทของอาหาร:</strong> {{ catfood.type }}</p>
                 <p><strong>ราคา:</strong> {{ catfood.price }} บาท</p>
-                <p><strong>คงเหลือ:</strong> {{ catfood.Stock }} จำนวน</p>
+                <p><strong>สต๊อกสินค้า:</strong> {{ catfood.Stock }} จำนวน</p>
             </div>
         </div>
         <div class="action-buttons">
