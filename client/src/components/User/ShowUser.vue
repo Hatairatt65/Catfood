@@ -11,36 +11,56 @@
     </div>
   </div>
 </template>
+
 <style scoped>
 .user-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  max-width: 400px;
-  margin: 20px auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #ffffff, #f2f3f7);
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 450px;
+  margin: 30px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.user-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .title {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .user-details {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 2;
+  color: #34495e;
 }
 
 .user-details p {
-  margin: 10px 0;
-  color: #555;
+  margin: 15px 0;
+  font-size: 18px;
 }
 
 .user-details strong {
-  color: #333;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.user-details span {
+  color: #2980b9;
+  font-weight: 600;
+}
+
+.user-details p:hover span {
+  color: #395dde;
+  transition: color 0.2s ease;
 }
 </style>
 

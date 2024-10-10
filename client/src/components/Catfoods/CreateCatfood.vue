@@ -12,8 +12,14 @@
       </div>
       <div class="form-group">
         <label>เหมาะสำหรับอายุ :</label>
-        <input type="text" v-model="catfood.age" />
-      </div>
+        <select v-model="catfood.age" class="form-input select-input">
+            <option value="">กรุณาเลือก</option>
+            <option value="2-10 เดือน">2-10 เดือน</option>
+            <option value="1 ปีขึ้นไป">1 ปีขึ้นไป</option>
+            <option value="โตเต็มวัย">โตเต็มวัย</option>
+        </select>
+    </div>
+
       <div class="form-group">
         <label>ประเภทของอาหาร :</label>
         <label>
@@ -135,6 +141,26 @@ input[type="radio"] {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   max-width: 150px; /* เปลี่ยนขนาดความกว้างที่ต้องการ */
   height: auto; /* รักษาสัดส่วนของภาพ */
+}
+.select-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; /* Transition for select */
+}
+
+.select-input:hover {
+    border-color: #37a8d4; /* เปลี่ยนสี border ขณะเลื่อนเมาส์ */
+    box-shadow: 0 0 5px rgba(27, 98, 126, 0.5);
+}
+
+.select-input:focus {
+    border-color: #37a8d4;
+    box-shadow: 0 0 5px rgba(27, 98, 126, 0.5);
+    transform: translateY(0); /* Reset the transform on focus */
 }
 
 

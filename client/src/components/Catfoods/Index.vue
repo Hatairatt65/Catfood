@@ -1,6 +1,6 @@
 <template>
   <div class="catfood-container">
-    <h1>ALL Catfood</h1>
+    <h1>ALL CATFOOD</h1>
     <div class="top-controls">
       <!-- ช่องค้นหาพร้อมปุ่มค้นหา -->
       <input 
@@ -21,6 +21,7 @@
       >
         + Add Catfood
       </button>
+      <!-- Dropdown สำหรับเลือกช่วงอายุ -->
     </div>
     <h4>รายการอาหารแมว {{filteredCatfoods.length}} รายการ</h4>
     <div v-for="catfood in filteredCatfoods" :key="catfood.id" class="catfood-item">

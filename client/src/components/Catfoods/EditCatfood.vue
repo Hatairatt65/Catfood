@@ -15,8 +15,14 @@
             </div>
             <div class="form-group">
                 <label for="age">เหมาะสำหรับอายุ:</label>
-                <input type="text" id="age" v-model="catfood.age" class="form-input" />
+                <select id="age" v-model="catfood.age" class="form-input">
+                    <option v-if="!catfood.age" value="">กรุณาเลือก</option>
+                    <option value="2-10 เดือน">2-10 เดือน</option>
+                    <option value="1 ปีขึ้นไป">1 ปีขึ้นไป</option>
+                    <option value="โตเต็มวัย">โตเต็มวัย</option>
+                </select>
             </div>
+
             <div class="form-group">
                 <label>ประเภทของอาหาร:</label>
                 <label>

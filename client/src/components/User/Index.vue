@@ -6,7 +6,6 @@
     </div>
     <hr />
     <div v-if="users.length" class="user-list">
-      <div class="user-count"><b>จำนวนผู้ใช้งาน:</b> {{ users.length }}</div><br>
       <div v-for="user in users" v-bind:key="user.id" class="user-card">
         <div class="user-details">
           <div class="user-detail"><b>id:</b> <span>{{ user.id }}</span></div>
